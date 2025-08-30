@@ -31,7 +31,6 @@ A lightweight, cross-platform, zero-dependency HTTP server written in Python tha
 git clone https://github.com/Chittu13/File_Transfer.git
 cd File_Transfer
 python3 Httpseever3.py
-
 #Or
 
 python2 Httpserver2.py
