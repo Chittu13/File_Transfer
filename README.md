@@ -30,7 +30,8 @@ A lightweight, cross-platform, zero-dependency HTTP server written in Python tha
 ```bash
 git clone https://github.com/Chittu13/File_Transfer.git
 cd File_Transfer
-python3 file_server.py
+python3 Httpseever3.py
+python2 Httpserver2.py
 ```
 
 
